@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Squirrel;
 
 namespace SquirrelTest
 {
@@ -23,6 +24,26 @@ namespace SquirrelTest
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using(var mgr = UpdateManager.GitHubUpdateManager("https://github.com/Franguestclain/SquirrelTest"))
+                {
+                    MessageBoxResult result = MessageBox.Show("Hay una actualizacion del software, ¿Desea instalarla?", "Test advice", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        await mgr.Result.UpdateApp();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hubo un error {ex.Message}");
+            }
         }
     }
 }
