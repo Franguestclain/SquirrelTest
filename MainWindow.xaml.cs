@@ -32,10 +32,14 @@ namespace SquirrelTest
             {
                 using(var mgr = UpdateManager.GitHubUpdateManager("https://github.com/Franguestclain/SquirrelTest"))
                 {
-                    MessageBoxResult result = MessageBox.Show("Hay una actualizacion del software, ¿Desea instalarla?", "Test advice", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (result == MessageBoxResult.Yes)
+                    var updates = mgr.Result.CheckForUpdate().Result;
+                    if(updates.ReleasesToApply.Count > 0)
                     {
-                        await mgr.Result.UpdateApp();
+                        MessageBoxResult result = MessageBox.Show("Hay una actualizacion del software, ¿Desea instalarla?", "Test advice", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            await mgr.Result.UpdateApp();
+                        }
                     }
                 }
 
