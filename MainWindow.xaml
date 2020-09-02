@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Version 1.0.0</TextBlock>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Version 1.0.2</TextBlock>
     </Grid>
 </Window>
